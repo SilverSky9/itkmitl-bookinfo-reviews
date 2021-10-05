@@ -1,0 +1,6 @@
+services:
+  reviews:
+    build: .
+    image: ghcr.io/silversky9/reviews-services:dev
+    ports:
+      - "8082:9080"
