@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookinfo-dev-review
+  namespace: student25-bookinfo-dev
+  labels:
+    app: bookinfo-dev-review
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookinfo-dev-review
+  template:
+    metadata:
+      labels:
+        app: bookinfo-dev-review
+    spec:
+      containers:
+      - name: bookinfo-dev-review
+        image: ghcr.io/silversky9/reviews-services:dev
+        imagePullPolicy: Always
+        env:
+        - name: ENABLE_RATINGS
+          value: "true"
+        - name: RATINGS_SERVICE
+          value: http://bookinfo-dev-ratings:8080
+      imagePullSecrets:
+      - name: registry-bookinfo
+     
